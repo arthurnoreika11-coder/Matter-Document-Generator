@@ -26,16 +26,16 @@ def render_email(
     except ValidationError as exc:
         raise HTTPException(status_code=422, detail=exc.errors())
 
-        result = render(template_entry, data)
+    result = render(template_entry, data)
 
-        session.add(AuditLog(
-            template_id=template_id,
-            payload_hash=hash_payload(payload),
-            status="rendered",
-        ))
-        session.commit()
+    session.add(AuditLog(
+        template_id=template_id,
+        payload_hash=hash_payload(payload),
+        status="rendered",
+    ))
+    session.commit()
 
-        return result
+    return result
 
 @router.post("/{template_id}/send")
 def send_rendered_email(
@@ -60,6 +60,13 @@ def send_rendered_email(
         status = "sent"
     except Exception as exc:
         status = f"failed: {str(exc)}"
+        session.add(AuditLog(
+            template_id=template_id,
+            payload_hash=hash_payload(payload),
+            status=status,
+        ))
+        session.commit()
+        raise HTTPException(status_code=502, detail=f"Failed to send email: {str(exc)}")
 
     session.add(AuditLog(
         template_id=template_id,
@@ -67,13 +74,5 @@ def send_rendered_email(
         status=status,
     ))
     session.commit()
-    raise HTTPException(status_code=502, detail=f"Failed to send email: {str(exc)}")
 
-session.add(AuditLog(
-    template_id=template_id,
-    payload_hash=hash_payload(payload),
-    status=status,
-))
-session.commit()
-
-return {"status": "sent", "subject": result.subject}
+    return {"status": "sent", "subject": result.subject}
