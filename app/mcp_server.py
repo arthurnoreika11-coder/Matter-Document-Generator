@@ -5,7 +5,7 @@ from app.templates.registry import TEMPLATE_REGISTRY, get_template
 from app.core.merge_engine import render as merge_render
 from app.core.email_sender import send_email
 
-mcp -= FastMCP("matter-document-generator", "1.0.0")
+mcp = FastMCP("matter-document-generator", "1.0.0")
 
 @mcp.resource("templates://list")
 def list_templates() -> dict:
