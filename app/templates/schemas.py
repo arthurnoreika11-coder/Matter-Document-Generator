@@ -7,11 +7,11 @@ class WelcomeEmailSchema(StrictModel):
     email: EmailStr
     matter_reference: str
     client_name: str
-    client_email: EmailStr
+    fee_earner_name: str
 
 class CaseUpdateEmailSchema(StrictModel):
     email: EmailStr
     matter_reference: str
     client_name: str
-    client_email: EmailStr
+    fee_earner_name: str
     case_update_summary: str
