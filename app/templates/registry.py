@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 from pydantic import BaseModel
 
 from app.templates.schemas import WelcomeEmailSchema, CaseUpdateEmailSchema
@@ -28,5 +31,5 @@ TEMPLATES: dict[str, TemplateEntry] = {
     ),
 }
 
-def get_template_entry(template_id: str) -> TemplateEntry | None:
+def get_template_entry(template_id: str) -> Optional[TemplateEntry]:
     return TEMPLATES.get(template_id)
