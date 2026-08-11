@@ -29,5 +29,25 @@ uvicorn app.main:app --reload
 
 No other code changes needed - validation, rendering, and auditing all flow through the registry automatically.
 
+## Sending a generated DOCX attachment
+```python
+from app.core.docx_gen import create_lba
+from app.core.email_sender import send_email
+
+docx_path = create_lba(
+    lba_name="letter-before-action",
+    recipient_name="Jane Client",
+    legal_basis="Breach of contract",
+    demands="Payment within 14 days",
+)
+
+send_email(
+    to="client@example.com",
+    subject="Letter before action",
+    body="Please see attached.",
+    attachments=[docx_path],
+)
+```
+
 ## License
 MIT

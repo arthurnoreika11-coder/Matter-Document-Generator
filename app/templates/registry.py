@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 from app.templates.schemas import WelcomeEmailSchema, CaseUpdateEmailSchema
 
-TEMPLATES_DIR = Path(__file__).parent / "templates"
+TEMPLATES_DIR = Path(__file__).parent / "files"
 
 @dataclass(frozen=True)
 class TemplateEntry:
@@ -19,14 +19,14 @@ class TemplateEntry:
 TEMPLATES: dict[str, TemplateEntry] = {
     "welcome_email": TemplateEntry(
         template_id="welcome_email",
-        file_name=TEMPLATES_DIR / "welcome_email.jinja",
-        subject_template="Welcome to Our Service, {client_name}!",
+        file_name="welcome_email.jinja",
+        subject_template="Welcome to Our Service, {{ client_name }}!",
         schema=WelcomeEmailSchema,
     ),
     "case_update_email": TemplateEntry(
         template_id="case_update_email",
-        file_name=TEMPLATES_DIR / "case_update_email.jinja",
-        subject_template="Case Update for Matter {matter_reference}",
+        file_name="case_update_email.jinja",
+        subject_template="Case Update for Matter {{ matter_reference }}",
         schema=CaseUpdateEmailSchema,
     ),
 }
