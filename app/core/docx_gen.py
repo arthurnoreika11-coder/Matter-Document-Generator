@@ -27,7 +27,7 @@ def create_lba(
 ) -> Path:
     doc = Document()
 
-    doc.add_heading("Letter before Action", level=1)
+    doc.add_heading("Letter Before Action", level=1)
 
     doc.add_paragraph(f"Dear {recipient_name},")
     doc.add_paragraph("Please accept this letter as a formal notice of my intention to take legal action.")

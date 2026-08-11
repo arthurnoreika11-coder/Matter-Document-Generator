@@ -1,6 +1,6 @@
 # Matter Document Generator
 
-A FastAPI and MCP service for strict legal email rendering/sending, with optional Letter Before Action DOCX generation. It is built for auditability: every email template is checked into the codebase, every payload is validated field-by-field against a strict schema, and every FastAPI render/send is logged.
+A FastAPI and MCP service for strict legal email rendering and sending, with optional Letter Before Action DOCX generation. It is built for auditability: every email template is checked into the codebase, every payload is validated field-by-field against a strict schema, and every FastAPI render and send is logged.
 
 ## Why "strict"
 - **Closed template registry** — templates aren't uploaded via the API; they live in `app/templates/files/` and get reviewed like code. This closes off Server-Side Template Injection (SSTI) as an attack surface entirely.
@@ -95,20 +95,20 @@ from app.core.email_sender import send_email
 docx_path = create_lba(
     lba_name="letter-before-action",
     recipient_name="Jane Client",
-    legal_basis="Breach of contract",
-    demands="Payment within 14 days",
+    legal_basis="Breach of contract resulting from a breach of Section 49 Consumer Rights Act 2015 - services to be performed with reasonable care and skill.",
+    demands="Return and carry out remedial works within 14 days.",
 )
 
 send_email(
     to="client@example.com",
-    subject="Letter before action",
+    subject="Letter Before Action",
     body="Please see attached.",
     attachments=[docx_path],
 )
 ```
 
 ## Audit log
-FastAPI render and send calls are written to SQLite via SQLModel. Each audit record stores the template ID, a SHA-256 hash of the payload, a timestamp, and the render/send status. Failed send attempts are also logged before the API returns a `502`.
+FastAPI render and send calls are written to SQLite via SQLModel. Each audit record stores the template ID, a SHA-256 hash of the payload, a timestamp, and the render or send status. Failed send attempts are also logged before the API returns a `502`.
 
 ## License
 MIT
