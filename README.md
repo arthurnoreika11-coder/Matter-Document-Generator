@@ -296,4 +296,4 @@ python -m pytest tests/ --cov=app --cov-report=html
 FastAPI render and send calls are written to SQLite via SQLModel. Each audit record stores the template ID, a SHA-256 hash of the payload, a timestamp, and the render or send status. Failed send attempts are also logged before the API returns a `502`.
 
 ## License
-MIT See [LICENSE](LICENSE) for details.
+MIT - See [LICENSE](LICENSE) for details.
