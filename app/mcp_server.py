@@ -1,7 +1,9 @@
 from mcp.server.fastmcp import FastMCP
 from pydantic import ValidationError
 
-from app.core.docx_gen import create_lba
+from app.core.bulk_action import _generate_docx_action, _generate_pdf_action, _send_email_action
+from app.core.generators.docx_gen import create_lba
+from app.core.generators.pdf_gen import create_lba
 from app.templates.registry import TEMPLATES, get_template_entry
 from app.core.merge_engine import render as merge_render
 from app.core.email_sender import send_email
@@ -122,6 +124,28 @@ def send_email_tool(
         "attachment_count": len(attachment_paths or []),
     }
 
+@mcp.tool()
+def bulk_action_tool(
+    action: str,
+    rows: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    """
+    Perform a bulk action on a list of rows. Each row is a dictionary
+    of string values, such as might be read from a CSV file.
+
+    Supported actions:
+    - "generate_docx": generate a Letter Before Action DOCX for each row
+    - "generate_pdf": generate a Letter Before Action PDF for each row
+    - "send_email": send an email for each row using the specified template_id and payload fields
+    """
+    if action == "generate_docx":
+        return [_generate_docx_action(row) for row in rows]
+    elif action == "generate_pdf":
+        return [_generate_pdf_action(row) for row in rows]
+    elif action == "send_email":
+        return [_send_email_action(row) for row in rows]
+    else:
+        return [{"status": "error", "error": f"Unknown action '{action}'"}]
 
 if __name__ == "__main__":
     mcp.run()
