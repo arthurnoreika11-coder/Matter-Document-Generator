@@ -5,7 +5,7 @@ from pathlib import Path
 
 from docx import Document
 
-from app.core.doc_gens.doc_setup import _safe_docx_filename
+from app.core.generators.doc_setup import _safe_docx_filename
 
 def create_lba(
     lba_name: str,
@@ -26,7 +26,7 @@ def create_lba(
 
     target_dir = Path(output_dir) if output_dir is not None else Path(tempfile.mkdtemp(prefix="matter-docx-"))
     target_dir.mkdir(parents=True, exist_ok=True)
-    docx_path = target_dir / _safe_doc_filename(lba_name)
+    docx_path = target_dir / _safe_docx_filename(lba_name)
 
     doc.save(docx_path)
 

@@ -72,8 +72,8 @@ def generate_lba_pdf(lba_name: str, recipient_name: str, legal_basis: str, deman
 
     return {
         'status': 'success',
-        'docx_name': docx_path.name,
-        'docx_path': str(docx_path),
+        'pdf_name': pdf_path.name,
+        'pdf_path': str(pdf_path),
     }
 
 @mcp.tool()
