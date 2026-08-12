@@ -292,14 +292,6 @@ python -m pytest tests/ --cov=app --cov-report=html
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io)
 - [Resend Email API](https://resend.com/docs)
 
-send_email(
-    to="client@example.com",
-    subject="Letter Before Action",
-    body="Please see attached.",
-    attachments=[docx_path],
-)
-```
-
 ## Audit log
 FastAPI render and send calls are written to SQLite via SQLModel. Each audit record stores the template ID, a SHA-256 hash of the payload, a timestamp, and the render or send status. Failed send attempts are also logged before the API returns a `502`.
 
