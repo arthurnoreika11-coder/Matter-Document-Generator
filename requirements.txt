@@ -8,3 +8,4 @@ python-dotenv
 pydantic-settings
 mcp[cli] >=1.28, <2
 python-docx
+reportlab

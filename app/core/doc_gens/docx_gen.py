@@ -1,22 +1,11 @@
 from __future__ import annotations
 
-import re
 import tempfile
 from pathlib import Path
 
 from docx import Document
 
-
-def _safe_docx_filename(name: str) -> str:
-    base_name = Path(name).name
-    stem = Path(base_name).stem
-    safe_stem = re.sub(r"[^A-Za-z0-9._-]+", "_", stem).strip("._-")
-
-    if not safe_stem:
-        safe_stem = "letter-before-action"
-
-    return f"{safe_stem}.docx"
-
+from app.core.doc_gens.doc_setup import _safe_docx_filename
 
 def create_lba(
     lba_name: str,
@@ -37,7 +26,7 @@ def create_lba(
 
     target_dir = Path(output_dir) if output_dir is not None else Path(tempfile.mkdtemp(prefix="matter-docx-"))
     target_dir.mkdir(parents=True, exist_ok=True)
-    docx_path = target_dir / _safe_docx_filename(lba_name)
+    docx_path = target_dir / _safe_doc_filename(lba_name)
 
     doc.save(docx_path)
 
