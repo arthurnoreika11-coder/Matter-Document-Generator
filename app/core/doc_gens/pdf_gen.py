@@ -5,7 +5,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
-from app.core.doc_gens.doc_setup import _safe_docx_filename
+from app.core.doc_gens.doc_setup import _safe_doc_filename
 
 doc = SimpleDocTemplate(
     docTitle, 
