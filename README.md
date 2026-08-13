@@ -1,6 +1,6 @@
 # Matter Document Generator
 
-A robust, audit-first FastAPI and MCP service for strict legal email rendering and sending, with optional Letter Before Action (LBA) DOCX generation. Designed for legal teams requiring compliance, security, and auditability.
+A robust, audit-first FastAPI and MCP service for strict legal email rendering and sending, with optional Letter Before Action (LBA) DOCX and PDF generation. Designed for legal teams requiring compliance, security, and auditability.
 
 **Key features:** Sandboxed template rendering, strict payload validation, comprehensive audit logging, MCP server integration, and bulk processing capabilities.
 
